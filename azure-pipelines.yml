@@ -1,0 +1,97 @@
+# ASP.NET Core
+# Build and test ASP.NET Core web applications targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/vsts/pipelines/languages/dotnet-core
+
+pool:
+  vmImage: 'windows-latest'
+
+trigger:
+  branches:
+    include:
+    - main
+    - refs/tags/*
+
+variables:
+  buildConfiguration: 'Release'
+  # Define the GitVersion environment variables so they can be used in all tasks.
+  GitVersion.SemVer: ''
+  GitVersion.NuGetVersion: ''
+
+steps:
+- task: gitversion/setup@0
+  displayName: Install GitVersion
+  inputs:
+    versionSpec: '5.x'
+
+- task: gitversion/execute@0
+  displayName: Determine Version
+
+# https://dotnet.microsoft.com/download/dotnet/6.0
+- task: UseDotNet@2
+  displayName: Install .Net 6.0.101
+  inputs:
+    packageType: 'sdk'
+    version: '6.0.101'
+
+- script: |
+    echo buildConfiguration: $(buildConfiguration)
+    echo GitVersion.SemVer: $(GitVersion.SemVer)
+    echo GitVersion.NuGetVersion: $(GitVersion.NuGetVersion)
+  displayName: 'Print Variables'
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration) /p:Version=$(GitVersion.SemVer)'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: |
+      **/tests/*.Tests/*.csproj
+      **/tests/*.IntegrationTests/*.csproj
+    arguments: '--configuration $(buildConfiguration) --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Include="[TvMazeScraper.*]*" /p:Exclude="[*.Tests]*%2c[*.*Tests]*%2c[*.Testing]*"'
+
+# Release: triggered by a version tag
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: |
+      **/samples/TvMazeScraper.Api/*.csproj
+    arguments: '--configuration $(buildConfiguration) --framework net5.0 --output $(build.artifactstagingdirectory) /p:Version=$(GitVersion.SemVer) --no-build'
+    zipAfterPublish: false
+
+- task: GithubRelease@0
+  displayName: Create GitHub Release
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+  inputs:
+   gitHubConnection: 'github.com'
+   repositoryName: $(Build.Repository.Name)
+   action: create
+   target: $(Build.SourceVersion)
+   tagSource: auto
+   tag: '$(GitVersion.SemVer)'
+
+- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+  displayName: 'Generate Code Coverage Report'
+  inputs:
+    reports: '$(Build.SourcesDirectory)/**/coverage*cobertura.xml'
+    targetdir: '$(build.artifactstagingdirectory)/coverage/'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish Code Coverage Results'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(build.artifactstagingdirectory)/coverage/cobertura.xml'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifacts'
+  condition: always()
+  inputs:
+    PathtoPublish: $(build.artifactstagingdirectory)

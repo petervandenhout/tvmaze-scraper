@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TvMazeScraper.Api", "src\TvMazeScraper.Api\TvMazeScraper.Api.csproj", "{B51E760A-FF54-447F-B809-2A8083344D67}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TvMazeScraper.Core", "src\TvMazeScraper.Core\TvMazeScraper.Core.csproj", "{265BF0B6-599C-4DD3-BF56-4B6D487486CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TvMazeScraper.Core.Tests", "tests\TvMazeScraper.Core.Tests\TvMazeScraper.Core.Tests.csproj", "{D0DD075B-C677-4920-A2DD-F485BE328CF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TvMazeScraper.Api.Tests", "tests\TvMazeScraper.Api.Tests\TvMazeScraper.Api.Tests.csproj", "{5EEE5DD4-547E-40DD-B31A-FCEEA8AE7E3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TvMazeScraper.EntityFrameworkCore", "src\TvMazeScraper.EntityFrameworkCore\TvMazeScraper.EntityFrameworkCore.csproj", "{05C38FDB-5D16-41E9-977E-EF1EA69ED8B8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TvMazeScraper.EntityFrameworkCore.Tests", "tests\TvMazeScraper.EntityFrameworkCore.Tests\TvMazeScraper.EntityFrameworkCore.Tests.csproj", "{6D9E75BE-C899-4291-927B-900C31E34556}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "50 Core", "50 Core", "{70D1B46D-3E83-49F4-B923-E2FF796AF0CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10 Api", "10 Api", "{A556A22D-3A72-421D-886C-D7F0F09B3491}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "80 Data", "80 Data", "{2D7F60AC-DBAD-430F-87A3-961DEB397687}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 Solution Files", "00 Solution Files", "{1C55AB96-8553-413B-9945-E06F914F01F3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		azure-pipelines.yml = azure-pipelines.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B51E760A-FF54-447F-B809-2A8083344D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B51E760A-FF54-447F-B809-2A8083344D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B51E760A-FF54-447F-B809-2A8083344D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B51E760A-FF54-447F-B809-2A8083344D67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265BF0B6-599C-4DD3-BF56-4B6D487486CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265BF0B6-599C-4DD3-BF56-4B6D487486CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265BF0B6-599C-4DD3-BF56-4B6D487486CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265BF0B6-599C-4DD3-BF56-4B6D487486CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0DD075B-C677-4920-A2DD-F485BE328CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0DD075B-C677-4920-A2DD-F485BE328CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0DD075B-C677-4920-A2DD-F485BE328CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0DD075B-C677-4920-A2DD-F485BE328CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EEE5DD4-547E-40DD-B31A-FCEEA8AE7E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EEE5DD4-547E-40DD-B31A-FCEEA8AE7E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EEE5DD4-547E-40DD-B31A-FCEEA8AE7E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EEE5DD4-547E-40DD-B31A-FCEEA8AE7E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C38FDB-5D16-41E9-977E-EF1EA69ED8B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C38FDB-5D16-41E9-977E-EF1EA69ED8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C38FDB-5D16-41E9-977E-EF1EA69ED8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C38FDB-5D16-41E9-977E-EF1EA69ED8B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D9E75BE-C899-4291-927B-900C31E34556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D9E75BE-C899-4291-927B-900C31E34556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D9E75BE-C899-4291-927B-900C31E34556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D9E75BE-C899-4291-927B-900C31E34556}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B51E760A-FF54-447F-B809-2A8083344D67} = {A556A22D-3A72-421D-886C-D7F0F09B3491}
+		{265BF0B6-599C-4DD3-BF56-4B6D487486CF} = {70D1B46D-3E83-49F4-B923-E2FF796AF0CF}
+		{D0DD075B-C677-4920-A2DD-F485BE328CF7} = {70D1B46D-3E83-49F4-B923-E2FF796AF0CF}
+		{5EEE5DD4-547E-40DD-B31A-FCEEA8AE7E3C} = {A556A22D-3A72-421D-886C-D7F0F09B3491}
+		{05C38FDB-5D16-41E9-977E-EF1EA69ED8B8} = {2D7F60AC-DBAD-430F-87A3-961DEB397687}
+		{6D9E75BE-C899-4291-927B-900C31E34556} = {2D7F60AC-DBAD-430F-87A3-961DEB397687}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF018025-4A97-49F8-888F-C70856C1862A}
+	EndGlobalSection
+EndGlobal
