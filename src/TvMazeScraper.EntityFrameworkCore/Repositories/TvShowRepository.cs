@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 using TvMazeScraper.Entities;
 using TvMazeScraper.Repositories;
 
@@ -14,12 +13,14 @@ namespace TvMazeScraper.EntityFrameworkCore.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<TvShow>> GetAsync(IEnumerable<Expression<Func<TvShow, bool>>> predicates, int skip, int take, CancellationToken cancellationToken)
+        public async Task<int> CountAsync(CancellationToken cancellationToken)
+        {
+            return await _dbContext.TvShows.CountAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<TvShow>> GetAsync(int skip, int take, CancellationToken cancellationToken)
         {
             var query = _dbContext.TvShows.Where(_ => true);
-
-            foreach (var predicate in predicates)
-                query = query.Where(predicate);
 
             query = query.Include(p => p.Cast.OrderByDescending(c => c.Birthday))
                 .OrderBy(p => p.Id)

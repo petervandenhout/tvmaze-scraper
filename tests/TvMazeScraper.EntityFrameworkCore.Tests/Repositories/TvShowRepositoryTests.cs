@@ -1,11 +1,5 @@
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using TvMazeScraper.Entities;
 
 namespace TvMazeScraper.EntityFrameworkCore.Repositories
@@ -26,36 +20,28 @@ namespace TvMazeScraper.EntityFrameworkCore.Repositories
         }
 
         [Fact]
-        public async Task GetAsync_Should_Return5TvShowsInAscendingOrderOfId()
+        public async Task GetAsync_Should_ReturnTvShowsInAscendingOrderOfId()
         {
-            var predicates = new List<Expression<Func<TvShow, bool>>>();
-            predicates.Add(s => s.Id > 5 && s.Id <= 10);
+            var results = await _tvShowRepository.GetAsync(0, int.MaxValue, CancellationToken.None);
 
-            var results = await _tvShowRepository.GetAsync(predicates, 0, int.MaxValue, CancellationToken.None);
-
-            results.Should().HaveCount(5);
+            results.Should().HaveCount(10);
             results.Select(s => s.Id).Should().BeInAscendingOrder();
         }
 
         [Fact]
         public async Task GetAsync_Should_Return2TvShowsWithTakeAndSkip()
         {
-            var predicates = new List<Expression<Func<TvShow, bool>>>();
-            predicates.Add(s => s.Id > 5 && s.Id <= 10);
-
-            var results = await _tvShowRepository.GetAsync(predicates, 1, 2, CancellationToken.None);
+            var results = await _tvShowRepository.GetAsync(1, 2, CancellationToken.None);
 
             results.Should().HaveCount(2);
-            results.First().Name.Should().Be("TV Show 7");
-            results.Last().Name.Should().Be("TV Show 8");
+            results.First().Name.Should().Be("TV Show 2");
+            results.Last().Name.Should().Be("TV Show 3");
         }
 
         [Fact]
         public async Task GetAsync_Should_ReturnTvShowsWithActorsInAscendingOrderOfBirthday()
         {
-            var predicates = new List<Expression<Func<TvShow, bool>>>();
-
-            var results = await _tvShowRepository.GetAsync(predicates, 0, int.MaxValue, CancellationToken.None);
+            var results = await _tvShowRepository.GetAsync(0, int.MaxValue, CancellationToken.None);
 
             results.Should().HaveCount(10);
             results.First().Cast.Should().HaveCount(3);
