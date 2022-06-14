@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Opw.HttpExceptions.AspNetCore" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TvMazeScraper.Core\TvMazeScraper.Core.csproj" />
+    <ProjectReference Include="..\TvMazeScraper.EntityFrameworkCore\TvMazeScraper.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>
