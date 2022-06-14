@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using TvMazeScraper.Entities;
 
 namespace TvMazeScraper.Repositories
@@ -17,5 +18,7 @@ namespace TvMazeScraper.Repositories
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
         Task<int> CountAsync(CancellationToken cancellationToken);
+
+        TvShow Add([NotNull] TvShow tvShow);
     }
 }

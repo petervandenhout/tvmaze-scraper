@@ -14,9 +14,9 @@ namespace TvMazeScraper.TvShows
         public GetPagedTvShowListQueryTests() : base()
         {
             var tvShows = new List<TvShow>();
-            var actorA = new Actor { Name = "Actor A", Birthday = new DateOnly(1980, 5, 12) };
-            var actorB = new Actor { Name = "Actor B", Birthday = new DateOnly(1970, 5, 12) };
-            var actorC = new Actor { Name = "Actor A", Birthday = new DateOnly(1990, 5, 12) };
+            var actorA = new Actor { Name = "Actor A", Birthday = new DateTime(1980, 5, 12) };
+            var actorB = new Actor { Name = "Actor B", Birthday = new DateTime(1970, 5, 12) };
+            var actorC = new Actor { Name = "Actor A", Birthday = new DateTime(1990, 5, 12) };
 
             tvShows.Add(new TvShow() { Id = 1, Name = "TV Show 1", Cast = new List<Actor> { actorA, actorB, actorC } });
             tvShows.Add(new TvShow() { Id = 2, Name = "TV Show 2", Cast = new List<Actor> { actorA, actorB, actorC } });
@@ -34,9 +34,9 @@ namespace TvMazeScraper.TvShows
         }
 
         [Fact]
-        public async Task Handler_Should_GetTvShows_ForPage1()
+        public async Task Handler_Should_GetTvShows_ForPage0()
         {
-            var result = await Mediator.Send(new GetPagedTvShowListQuery { Page = 1 });
+            var result = await Mediator.Send(new GetPagedTvShowListQuery { Page = 0 });
 
             result.Should().NotBeNull();
 
@@ -44,9 +44,9 @@ namespace TvMazeScraper.TvShows
         }
 
         [Fact]
-        public async Task Handler_Should_GetTvShows_ForPage1_WithItemsPerPage2()
+        public async Task Handler_Should_GetTvShows_ForPage0_WithItemsPerPage2()
         {
-            var result = await Mediator.Send(new GetPagedTvShowListQuery { Page = 1, ItemsPerPage = 2 });
+            var result = await Mediator.Send(new GetPagedTvShowListQuery { Page = 0, ItemsPerPage = 2 });
 
             result.Should().NotBeNull();
 
@@ -54,9 +54,9 @@ namespace TvMazeScraper.TvShows
         }
 
         [Fact]
-        public async Task Handler_Should_GetTvShows_ForPage3()
+        public async Task Handler_Should_GetTvShows_ForPage2()
         {
-            var result = await Mediator.Send(new GetPagedTvShowListQuery { Page = 3, ItemsPerPage = 2 });
+            var result = await Mediator.Send(new GetPagedTvShowListQuery { Page = 2, ItemsPerPage = 2 });
 
             result.Should().NotBeNull();
 

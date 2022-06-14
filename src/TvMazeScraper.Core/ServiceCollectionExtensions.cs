@@ -14,6 +14,8 @@ namespace TvMazeScraper
             services.AddOptions();
             services.Configure<TvMazeScraperOptions>(configuration.GetSection(nameof(TvMazeScraperOptions)));
 
+            services.AddHttpClient();
+
             if (services.BuildServiceProvider().GetService<IMediator>() == null)
                 services.AddMediatR(typeof(GetPagedTvShowListQuery).Assembly);
             ServiceRegistrar.AddMediatRClasses(services, new[] { typeof(GetPagedTvShowListQuery).Assembly });

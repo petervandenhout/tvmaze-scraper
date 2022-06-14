@@ -6,7 +6,7 @@ namespace TvMazeScraper.TvShows
 {
     public class GetPagedTvShowListQuery : IRequest<TvShowListModel>
     {
-        public int Page { get; set; } = 1;
+        public int Page { get; set; }
 
         public int? ItemsPerPage { get; set; }
 
@@ -30,8 +30,15 @@ namespace TvMazeScraper.TvShows
                     Total = await _uow.TvShows.CountAsync(cancellationToken)
                 };
 
-                var skip = (request.Page - 1) * model.ItemsPerPage;
-                model.TvShows = await _uow.TvShows.GetAsync(skip, model.ItemsPerPage, cancellationToken);
+                var skip = (request.Page) * model.ItemsPerPage;
+                var tvShows = await _uow.TvShows.GetAsync(skip, model.ItemsPerPage, cancellationToken);
+                model.TvShows = tvShows.Select(s => new TvShowModel
+                {
+                    Id = s.Id,
+                    TvMazeId = s.Id,
+                    Name = s.Name,
+                    Cast = s.Cast.Select(a => new ActorModel { Id = a.Id, Name = a.Name, Birthday = a.Birthday })
+                });
 
                 return model;
             }

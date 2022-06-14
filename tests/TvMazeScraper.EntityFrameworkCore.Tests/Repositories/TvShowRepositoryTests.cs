@@ -52,11 +52,11 @@ namespace TvMazeScraper.EntityFrameworkCore.Repositories
         {
             var context = ServiceProvider.GetRequiredService<TvMazeScraperDbContext>();
 
-            var actorA = new Actor { Name = "Actor A", Birthday = new DateOnly(1980, 5, 12) };
+            var actorA = new Actor { Name = "Actor A", Birthday = new DateTime(1980, 5, 12) };
             context.Actors.Add(actorA);
-            var actorB = new Actor { Name = "Actor B", Birthday = new DateOnly(1970, 5, 12) };
+            var actorB = new Actor { Name = "Actor B", Birthday = new DateTime(1970, 5, 12) };
             context.Actors.Add(actorB);
-            var actorC = new Actor { Name = "Actor A", Birthday = new DateOnly(1990, 5, 12) };
+            var actorC = new Actor { Name = "Actor A", Birthday = new DateTime(1990, 5, 12) };
             context.Actors.Add(actorC);
             context.SaveChanges();
 

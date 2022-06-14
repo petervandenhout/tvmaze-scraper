@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 using TvMazeScraper.Entities;
 using TvMazeScraper.Repositories;
 
@@ -11,6 +12,12 @@ namespace TvMazeScraper.EntityFrameworkCore.Repositories
         public TvShowRepository(TvMazeScraperDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public TvShow Add([NotNull] TvShow tvShow)
+        {
+            var entry = _dbContext.TvShows.Add(tvShow);
+            return entry.Entity;
         }
 
         public async Task<int> CountAsync(CancellationToken cancellationToken)
